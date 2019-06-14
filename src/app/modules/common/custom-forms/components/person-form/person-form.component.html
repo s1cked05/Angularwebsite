@@ -1,0 +1,78 @@
+<form (ngSubmit)="onSubmit()"
+      [formGroup]="personForm"
+      class="p-4">
+    <div class="example-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Imię i nazwisko</mat-label>
+            <input formControlName="name"
+                   type="text"
+                   name="nameField"
+                   matInput
+                   #inputName
+                   maxlength="50"
+                   placeholder="Wprowadź imię i nazwisko">
+            <mat-icon matSuffix color="primary">face</mat-icon>
+            <mat-hint align="end">{{inputName.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="getPersonControl('name').errors?.required">RPole wymagane!</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName="email"
+                   type="email"
+                   name="emailField"
+                   matInput
+                   #inputEmail
+                   maxlength="50"
+                   placeholder="Wprowadź adres email">
+
+            <mat-icon matSuffix color="primary">email</mat-icon>
+            <mat-hint align="end">{{inputEmail.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="getPersonControl('email').errors?.required">Pole wymagane!</mat-error>
+            <mat-error *ngIf="getPersonControl('email').errors?.email">Zły format</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Hasło</mat-label>
+            <input formControlName="password"
+                   [type]="hide ? 'password' : 'text'"
+                   name="passwordField"
+                   matInput
+                   #inputPassword
+                   maxlength="30"
+                   placeholder="Wprowadź hasło">
+            <mat-icon class="interactable" matSuffix color="primary" (click)="hide = !hide" color="primary">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <mat-form-field appearance="outline">
+            <mat-label>Nazwa uczelni</mat-label>
+            <input formControlName="college"
+                   type="text"
+                   name="collegeField"
+                   matInput
+                   #inputEmail
+                   maxlength="80"
+                   placeholder="Wprowadź nazwę uczelni">
+            <mat-icon matSuffix color="primary">grade</mat-icon>
+            <mat-hint align="end">{{inputEmail.value?.length || 0}}/80</mat-hint>
+            <mat-error *ngIf="getPersonControl('college').errors?.required">Wymagane</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="example-container">
+        <app-discipline-control [control]="getPersonControl('disciplines')"></app-discipline-control>
+    </div>
+    <div class="example-container">
+        <app-simple-multi-select [title]="'Rola'"
+                                 [data]="{'ADMIN':'Admin', 'USER':'User', 'EXPERT': 'Expert'}"
+                                 [control]="getPersonControl('roles')"
+                                 >
+        </app-simple-multi-select>
+    </div>
+    <button mat-raised-button type="button" (click)="cancelEmitter.emit()">Anuluj</button>
+    <button class="ml-3" mat-raised-button type="submit"
+            [disabled]="personForm.invalid"
+            color="primary">Potwierdź</button>
+</form>

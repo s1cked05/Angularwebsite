@@ -1,0 +1,33 @@
+<app-admin-layout>
+    <ng-container main>
+        <div class="row px-5">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <mat-icon matSuffix
+                          class="add-icon" (click)="openDialogUserAdd()">add</mat-icon>
+            </div>
+        </div>
+        <div class="row text-center px-5">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imię i nazwisko</th>
+                        <th>Email</th>
+                        <th>Rola</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="interactable" *ngFor="let user of users; index as i"
+                        (click)="openDialogUserEdit(user._id)">
+                        <td>{{i + 1}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <td *ngIf="user.roles[0]">{{user.roles[0]}}</td>
+                        <td *ngIf="!user.roles[0]">USER</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+</app-admin-layout>

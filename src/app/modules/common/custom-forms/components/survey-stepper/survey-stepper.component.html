@@ -1,0 +1,34 @@
+<mat-horizontal-stepper>
+    <mat-step>
+        <div class="text-center">
+            <app-survey-form>
+                <ng-template matStepLabel>Wypełnij formularz</ng-template>
+                <div class="mt-4">
+                    <button class="btn btn-outline-secondary"
+                            matStepperNext>Dalej</button>
+                </div>
+            </app-survey-form>
+        </div>
+    </mat-step>
+    <mat-step>
+        <div class="text-left">
+            <app-upload-form>
+                <ng-template matStepLabel>Umieść załączniki</ng-template>
+                <div class="mt-4 text-right">
+                    <button class="btn btn-outline-secondary mr-4"
+                            matStepperPrevious>Wróć</button>
+                    <button class="btn btn-outline-secondary"
+                            matStepperNext>Dalej</button>
+                </div>
+            </app-upload-form>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Wyślij</ng-template>
+        <div class="mt-4 text-right">
+            <button class="btn btn-outline-secondary mr-4"
+                    matStepperPrevious>Wróć</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()">Zatwierdź</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
